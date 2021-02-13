@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <div id="formEntrenamiento">
+        <div id="contenedorForm">
+            <h1>Agregar entrenamiento</h1>
+            <form>
+                <div>
+                    <input type="text" id="minutos" autocomplete="off" required>
+                    <label for="minutos">Minutos</label>
+                </div>
+                <div>
+                    <input type="text" id="peso" autocomplete="off" required>
+                    <label for="peso">Peso actual</label>
+                </div>
+                <div>
+                    <select id="tipo">
+                        <option>Entrenamiento 1</option>
+                        <option>Entrenamiento 2</option>
+                    </select>
+                </div>
+                <div>
+                    <button id="cancelar">Cancelar</button>
+                    <input type="submit" value="Agregar">
+                </div>
+            </form>
+        </div>
+    </div>
+    <nav>
+        <div>
+            <ul>
+                <li>
+                    <button id="agregar">Agregar entrenamiento</button>
+                </li>
+                <li>
+                    <a href="index.html"><i data-feather="home"></i> Inicio</a>
+                </li>
+                <li>
+                    <a href="estadisticas.html"><i data-feather="bar-chart"> </i>Estadísticas</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <a href="login.html"><i data-feather="log-out"></i> Cerrar sesión</a>
+        </div>
+    </nav>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="codigo.js"></script>
+    <script>
+        feather.replace()
+    </script>
+</body>
+
+</html>
