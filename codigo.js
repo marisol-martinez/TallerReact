@@ -1,14 +1,12 @@
-document.ready(inicio);
 let cancelarRegistro = () => {
-    $("#formEntrenamiento").css("display", "none");
+    $("#formEntrenamiento").removeClass("abrirForm");
+    $("#formEntrenamiento").addClass("cerrarForm");
 }
 
 let agregarRegistro = () => {
-    $("#formEntrenamiento").css("display", "grid");
+    $("#formEntrenamiento").removeClass("cerrarForm");
+    $("#formEntrenamiento").addClass("abrirForm");
 }
 
-function inicio() {
-
-    $("agregar").click(agregarRegistro);
-    $("cancelar").click(cancelarRegistro);
-}
+$("#agregar").click(agregarRegistro);
+$("#cancelar").click(cancelarRegistro);
