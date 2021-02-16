@@ -27,6 +27,7 @@ let Login = () => {
   };
 
   const loguearse = (e) => {
+    e.preventDefault();
     console.log(mail.current.value);
     console.log(contrasena.current.value);
   }
@@ -34,7 +35,7 @@ let Login = () => {
   return (
       <div id="contenedorForm">
           <h1>Inicio de sesión</h1>
-          <form>
+          <form onSubmit={loguearse}>
             <div>
               <label htmlFor="nombre">Usuario
               <input type="text" id="nombre" autoComplete="off" required ref={mail}/>
@@ -45,7 +46,7 @@ let Login = () => {
               <input type="password" id="pass" autoComplete="off" required ref={contrasena}/>
               </label>
             </div>
-            <input type="button" value="Iniciar sesión" onClick={loguearse}/>
+            <input type="submitt" value="Iniciar sesión"/>
             <a href="registo.html">Registrarse</a>
           </form>
       </div>
