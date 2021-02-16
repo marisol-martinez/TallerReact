@@ -36,7 +36,7 @@ let Registro = () => {
         <div id="registro">
             <div id="contenedorForm">
                 <h1>Registro</h1>
-                <form>
+                <form onSubmit={registro}>
                     <div>
                         <input type="text" id="email" autocomplete="off" required ref={email}/>
                         <label for="email">Email</label>
@@ -53,7 +53,7 @@ let Registro = () => {
                         <input type="password" id="confirmar" autocomplete="off" required ref={verifContrasena}/>
                         <label for="confirmar">Confirmar contraseña</label>
                     </div>
-                    <input type="button" value="Registrarse" onClick={registro}/>
+                    <input type="submit" value="Registrarse" />
                     <a href="login.html">Volver al login</a>
                 </form>
             </div>

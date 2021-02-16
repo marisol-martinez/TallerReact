@@ -33,23 +33,25 @@ let Login = () => {
   }
 
   return (
+    <div id="registro">
       <div id="contenedorForm">
           <h1>Inicio de sesión</h1>
           <form onSubmit={loguearse}>
             <div>
-              <label htmlFor="nombre">Usuario
               <input type="text" id="nombre" autoComplete="off" required ref={mail}/>
-              </label>
+              <label htmlFor="nombre">Usuario</label>
+              
             </div>
             <div>
-              <label htmlFor="pass">Contraseña
               <input type="password" id="pass" autoComplete="off" required ref={contrasena}/>
-              </label>
+              <label htmlFor="pass">Contraseña</label>
+              
             </div>
-            <input type="submitt" value="Iniciar sesión"/>
+            <input type="submit" value="Iniciar sesión"/>
             <a href="registo.html">Registrarse</a>
           </form>
       </div>
+    </div>
   );
 }
 

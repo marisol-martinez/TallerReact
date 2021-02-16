@@ -4,6 +4,9 @@
     --verde: #8ee388;
     --verde-oscuro: #68cf61;
     --rojo: #eb4a31;
+    --fondo: #f4f7fc;
+    --violeta: #7541cc;
+    --violeta-oscuro: #3c0b8f;
 }
 
 * {
@@ -21,6 +24,11 @@ h1 {
     letter-spacing: 1px;
 }
 
+svg {
+    width: 20px;
+    margin-right: 15px;
+}
+
 
 /* - Agregar entrenamiento - */
 
@@ -34,15 +42,18 @@ h1 {
     background-color: rgba(0, 0, 0, .5);
     display: grid;
     place-items: center;
-    display: none
+}
+
+.cerrarForm {
+    display: none !important;
+}
+
+.abrirForm {
+    display: grid !important;
 }
 
 #formEntrenamiento h1 {
     font-size: 25px;
-}
-
-#contenedorForm {
-    padding: 10px 0 0;
 }
 
 #formEntrenamiento form div:last-child {
@@ -69,9 +80,17 @@ h1 {
 
 #contenedorForm {
     background-color: rgba(0, 0, 0, .7);
-    width: 25%;
+    width: 50%;
     border-radius: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
+}
+
+.bgBlanco {
+    background-color: white !important;
+}
+
+.bgBlanco h1 {
+    color: var(--azul);
 }
 
 form {
@@ -90,7 +109,7 @@ form {
 #pass,
 #confirmar,
 #minutos,
-#peso,
+#txtPeso,
 #tipo,
 #altura {
     background-color: transparent;
@@ -104,6 +123,12 @@ form {
     outline: 0;
     padding: 0 10px;
     font-family: 'Prompt', sans-serif;
+}
+
+#tipo,
+#minutos,
+#txtPeso {
+    color: black;
 }
 
 #contenedorForm form input:focus~label,
@@ -123,6 +148,10 @@ label {
     left: 10px;
     top: 0px;
     transition: 0.2s ease all;
+}
+
+.txtNegro {
+    color: black;
 }
 
 input[type="submit"],
@@ -199,13 +228,14 @@ nav div:nth-child(2) a svg {
 }
 
 nav ul {
-    margin-top: 40px;
+    margin-top: 30px;
     list-style: none;
+    text-align: center;
 }
 
 nav ul li:nth-child(1) {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 40px;
 }
 
 nav ul li a {
@@ -217,13 +247,12 @@ nav ul li a {
     display: flex;
 }
 
-nav ul li a svg {
-    width: 20px;
-    margin-right: 15px;
-}
-
 nav ul li a:hover {
     background-color: var(--azul-oscuro);
+}
+
+nav img {
+    height: 10vh;
 }
 
 #agregar {
@@ -240,4 +269,160 @@ nav ul li a:hover {
 
 #agregar:hover {
     background-color: var(--verde-oscuro);
+}
+
+
+/* - Main - */
+
+#bienvenida {
+    grid-area: bienvenida;
+    background-image: linear-gradient(var(--violeta), var(--violeta-oscuro));
+    color: white;
+    display: grid;
+}
+
+#bienvenida p {
+    margin: 10px 30px;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+#bienvenida p:nth-child(1) {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+#bienvenida p span {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#mensaje {
+    color: var(--verde);
+}
+
+main #peso {
+    grid-area: peso;
+}
+
+.bajo {
+    background-image: linear-gradient(to left top, var(--verde) 50%, white 50%);
+}
+
+.subio {
+    background-image: linear-gradient(to left top, var(--rojo) 50%, white 50%);
+}
+
+#cantEntrenamientos {
+    grid-area: cantEntrenamientos;
+    background-image: linear-gradient(var(--azul), var(--azul-oscuro));
+    color: white;
+    display: grid;
+    text-align: center;
+    place-items: center;
+    padding: 10px;
+    grid-template-rows: 1fr 2fr;
+}
+
+#cantEntrenamientos p:nth-child(2) {
+    font-size: 60px;
+}
+
+#imc {
+    grid-area: imc;
+    padding: 10px;
+}
+
+#imc p,
+#graficaminEntrenamientos p {
+    text-align: center;
+    font-size: 18px;
+}
+
+#listaEntrenamientos {
+    padding: 0 !important;
+    grid-area: listaEntrenamientos;
+}
+
+#listaEntrenamientos table{
+    width: 100%;
+}
+
+#minEntrenamientos {
+    grid-area: minEntrenamientos;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 0;
+}
+
+main {
+    background-color: var(--fondo);
+    display: grid;
+    padding: 10px 10px 10px calc(16% + 10px);
+    width: calc(84% - 20px);
+    height: calc(100vh - 20px);
+    grid-gap: 20px;
+    grid-template-areas: 'bienvenida bienvenida peso imc imc imc' 'bienvenida bienvenida cantEntrenamientos imc imc imc' 'listaEntrenamientos listaEntrenamientos minEntrenamientos minEntrenamientos minEntrenamientos minEntrenamientos' 'listaEntrenamientos listaEntrenamientos minEntrenamientos minEntrenamientos minEntrenamientos minEntrenamientos';
+    grid-template-columns: 1fr 1fr 1fr 3fr;
+    grid-template-rows: 1fr 1fr 2fr;
+}
+
+main div {
+    border-radius: 10px;
+    background-color: white;
+}
+
+#listaEntrenamientos table,
+#listaMinEntrenamientos table {
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: center;
+}
+
+table tr:first-child td:first-child {
+    border-top-left-radius: 10px;
+}
+
+table tr:first-child td:last-child {
+    border-top-right-radius: 10px;
+}
+
+#listaEntrenamientos table tr,
+#listaMinEntrenamientos table tr {
+    height: 30px;
+}
+
+#listaEntrenamientos table tr:nth-child(1),
+#listaMinEntrenamientos table tr:nth-child(1) {
+    background-color: var(--azul);
+    color: white;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+#listaMinEntrenamientos table tr:nth-child(1) {
+    background-color: var(--violeta);
+}
+
+#listaEntrenamientos table tr:nth-child(2n+2),
+#listaMinEntrenamientos table tr:nth-child(2n+2) {
+    background-color: #f7f7f7;
+}
+
+#listaEntrenamientos table button {
+    background: transparent;
+    border: none;
+    transform: translateY(3px);
+    cursor: pointer;
+    transition: .2s all;
+    outline: 0;
+}
+
+#listaEntrenamientos table button:hover {
+    color: var(--rojo);
+}
+
+#listaEntrenamientos table button svg {
+    width: 18px;
 }
