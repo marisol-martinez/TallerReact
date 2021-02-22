@@ -1,3 +1,5 @@
+import EliminarEntrenamiento from "./EliminarEntrenamiento"
+
 //contenedor de lista de entrenamientos
 const ListaEntrenamiento = () => {
                
@@ -14,61 +16,37 @@ const ListaEntrenamiento = () => {
                     <td>Correr</td>
                     <td>30</td>
                     <td>500</td>
-                    <td>
-                        <button>
-                            <i data-feather="trash-2"></i>
-                        </button>
-                    </td>
+                    <EliminarEntrenamiento/>
                 </tr>
                 <tr>
                     <td>Pesas</td>
                     <td>60</td>
                     <td>300</td>
-                    <td>
-                        <button>
-                            <i data-feather="trash-2"></i>
-                        </button>
-                    </td>
+                    <EliminarEntrenamiento/>
                 </tr>
                 <tr>
                     <td>Pesas</td>
                     <td>60</td>
                     <td>300</td>
-                    <td>
-                        <button>
-                            <i data-feather="trash-2"></i>
-                        </button>
-                    </td>
+                    <EliminarEntrenamiento/>
                 </tr>
                 <tr>
                     <td>Pesas</td>
                     <td>60</td>
                     <td>300</td>
-                    <td>
-                        <button>
-                            <i data-feather="trash-2"></i>
-                        </button>
-                    </td>
+                    <EliminarEntrenamiento/>
                 </tr>
                 <tr>
                     <td>Pesas</td>
                     <td>60</td>
                     <td>300</td>
-                    <td>
-                        <button>
-                            <i data-feather="trash-2"></i>
-                        </button>
-                    </td>
+                    <EliminarEntrenamiento/>
                 </tr>
                 <tr>
                     <td>Pesas</td>
                     <td>60</td>
                     <td>300</td>
-                    <td>
-                        <button>
-                            <i data-feather="trash-2"></i>
-                        </button>
-                    </td>
+                    <EliminarEntrenamiento/>
                 </tr>
             </table>
         </div>
