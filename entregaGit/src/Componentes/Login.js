@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import {Link,useHistory} from "react-router-dom";
 
-let Login = () => { 
+let Login = ({logged, dispatch}) => { 
   const mail = useRef(null);
   const contrasena = useRef(null);
   const [usuario, setUsuario] = useState([]);
@@ -9,7 +9,9 @@ let Login = () => {
   // useEffect(() => {
     // }, []);
 
-  let loguearse = (e) => {
+    let history = useHistory();
+    
+    let loguearse = (e) => {
     e.preventDefault();
     console.log(mail.current.value);
     console.log(contrasena.current.value);
@@ -30,7 +32,12 @@ let Login = () => {
     
       fetch("https://trainning-rest-api.herokuapp.com/v1/users/login", requestOptions)
         .then(response => response.text())
-        .then((datos) => setUsuario(datos.results))
+        .then((datos) => {
+          setUsuario(datos.results);
+          dispatch({type:"LOGUEAR"});
+          localStorage.setItem('usuarioLogueado', datos.results);
+          history.push("/dashboard");
+        })
         .catch(error => console.log('error', error));
   }
 

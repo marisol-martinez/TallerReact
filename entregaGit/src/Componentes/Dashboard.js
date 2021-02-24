@@ -8,6 +8,9 @@ import ListaEntrenamiento from './ListaEntrenamiento';
 // import MinutosEntrenamiento from './MinutosEntrenamientos';
 
 const Dashboard = () => { 
+
+  //if (!props.logged) return <Redirect to="/" />;
+
     return (
       <main>
           <InformacionPersonal/>
