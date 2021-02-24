@@ -1,11 +1,17 @@
+import {connect} from "react-redux";
+
 //componente con cantidad de entrenamientos, componente chico
-const CantidadEntrenamientos = () => { 
+const CantidadEntrenamientos = (props) => { 
     return (
       <div id="cantEntrenamientos">
             <p>Cantidad de entrenamientos</p>
-            <p>14</p>
+            <p>{props.listaDeEntrenamientos.length}</p>
         </div>  
     );
 }
 
-export default CantidadEntrenamientos
+const mapStateToProps = (state) => ({
+    listaDeEntrenamientos: state.listaDeEntrenamientos,
+});
+
+export default connect(mapStateToProps)(CantidadEntrenamientos)

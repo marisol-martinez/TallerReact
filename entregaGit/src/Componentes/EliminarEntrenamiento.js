@@ -1,22 +1,22 @@
-const EliminarEntrenamiento = () => {
-     //Delete training
-    //https://trainning-rest-api.herokuapp.com/v1/users/31/trainings/21
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "e0755d89bd8e0b787f7028c6e2ca1399");
-
-    var requestOptions = {
-    method: 'DELETE',
-    headers: myHeaders,
-    redirect: 'follow'
-    };
-
-    fetch("https://trainning-rest-api.herokuapp.com/v1/users/31/trainings/21", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
-
+const EliminarEntrenamiento = ({id}) => {
     const eliminarEntr = (e) => {
         console.log();
+
+        var myHeaders = new Headers();
+        let usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
+        let idEliminar = id;
+        myHeaders.append("Authorization", usuario.token);
+
+        var requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        redirect: 'follow'
+        };
+
+        fetch(`https://trainning-rest-api.herokuapp.com/v1/users/${usuario.id}/trainings/${id}`, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
       }
 
     return (

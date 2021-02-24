@@ -33,9 +33,10 @@ let Login = ({logged, dispatch}) => {
       fetch("https://trainning-rest-api.herokuapp.com/v1/users/login", requestOptions)
         .then(response => response.text())
         .then((datos) => {
-          setUsuario(datos.results);
-          dispatch({type:"LOGUEAR"});
-          localStorage.setItem('usuarioLogueado', datos.results);
+          setUsuario(datos);
+          //no funciona dispatch
+          //dispatch({type:"LOGUEAR"});
+          localStorage.setItem('usuarioLogueado', datos);
           history.push("/dashboard");
         })
         .catch(error => console.log('error', error));
@@ -58,6 +59,7 @@ let Login = ({logged, dispatch}) => {
             </div>
             <input type="submit" value="Iniciar sesión"/>
             <Link to="/Registro">Registrarse</Link>
+            <Link to="/Dashboard">Dashboard</Link>
           </form>
       </div>
     </div>
