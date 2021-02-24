@@ -7,6 +7,8 @@ let reducer = (state = initialState, action) => {
       return { ...state, logged: true };
     case "LISTADO_ENTRENAMIENTO":
       return { ...state, listaDeEntrenamientos: action.payload };
+      case "LISTADO_TIPOS":
+      return { ...state, tiposEntrenamientos: action.payload };
     default:
       return state;
   }

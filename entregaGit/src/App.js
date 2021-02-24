@@ -9,8 +9,6 @@ import Dashboard from './Componentes/Dashboard';
 import {Provider} from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-store.dispatch({type: "PRUEBA"});
-
 function App() {
   return (
     <Provider store={store}>
