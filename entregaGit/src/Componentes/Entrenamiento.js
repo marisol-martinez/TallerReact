@@ -1,10 +1,14 @@
-//cada entrenamiento para la lista de entrenamientos
-const Entrenamiento = ({id, tipo, peso}) => { //{tareas} = props //props es un obj, que tiene una propiedad tareas
+import EliminarEntrenamiento from "./EliminarEntrenamiento"
+
+const Entrenamiento = ({nombre}) => {
     return (
-        <div className="entrenamiento">
-            
-        </div>
-    );
+        <tr>
+            <td>Correr</td>
+            <td>30</td>
+            <td>500</td>
+            <EliminarEntrenamiento/>
+        </tr>
+    )
 }
 
-export default Entrenamiento
+export default Entrenamiento;

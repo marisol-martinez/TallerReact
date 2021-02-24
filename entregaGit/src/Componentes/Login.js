@@ -5,31 +5,32 @@ let Login = () => {
   const contrasena = useRef(null);
   const [usuario, setUsuario] = useState([]);
 
-  useEffect(() => {
-    fetch("https://trainning-rest-api.herokuapp.com/v1/users/login", requestOptions)
-      .then(response => response.text())
-      .then((datos) => setUsuario(datos.results))
-      .catch(error => console.log('error', error));
-  }, []);
+  // useEffect(() => {
+    // }, []);
 
-  var myHeaders = new Headers();
-
-  var raw = JSON.stringify({
-    "username": "m@m.com", 
-    "password": "m"
-  });
-
-  var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-  };
-
-  const loguearse = (e) => {
+  let loguearse = (e) => {
     e.preventDefault();
     console.log(mail.current.value);
     console.log(contrasena.current.value);
+
+    var myHeaders = new Headers();
+
+    var raw = JSON.stringify({
+      "username": mail.current.value, 
+      "password": contrasena.current.value
+    });
+  
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    
+      fetch("https://trainning-rest-api.herokuapp.com/v1/users/login", requestOptions)
+        .then(response => response.text())
+        .then((datos) => setUsuario(datos.results))
+        .catch(error => console.log('error', error));
   }
 
   return (
@@ -48,7 +49,7 @@ let Login = () => {
               
             </div>
             <input type="submit" value="Iniciar sesión"/>
-            <a href="registo.html">Registrarse</a>
+            {/* <Link to="/Registro">Registrarse</Link> */}
           </form>
       </div>
     </div>

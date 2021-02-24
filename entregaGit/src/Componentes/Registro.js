@@ -1,35 +1,36 @@
 import { useRef, useState, useEffect } from "react";
 
 let Registro = () => { 
-
     const email = useRef(null);
     const contrasena = useRef(null);
     const altura = useRef(null);
     const verifContrasena = useRef(null);
+    const [usuarioRegistrado, setUsuarioRegistrado] = useState([]);
 
-    useEffect(() => {
-        fetch("https://trainning-rest-api.herokuapp.com/v1/users/register", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-    }, []);
-
-  var raw = JSON.stringify({
-    "username": "mm@m.com", 
-    "password": "m",
-    "height": 180
-  });
-
-  var requestOptions = {
-    method: 'POST',
-    body: raw,
-    redirect: 'follow'
-  };
-
-  const registro = (e) => {
+  let registro = (e) => {
+    e.preventDefault();
     console.log(email.current.value);
     console.log(contrasena.current.value);
     console.log(altura.current.value);
+
+    var raw = JSON.stringify({
+        "username": email.current.value, 
+        "password": contrasena.current.value,
+        "height": Number(altura.current.value)
+      });
+    
+      var requestOptions = {
+        method: 'POST',
+        body: raw,
+        redirect: 'follow'
+      };
+
+      fetch("https://trainning-rest-api.herokuapp.com/v1/users/register", requestOptions)
+      .then(response => response.text())
+      .then(datos => setUsuarioRegistrado(datos.results))
+      .catch(error => console.log('error', error));
+      console.log(setUsuarioRegistrado);
+      
   }
 
     return (
@@ -38,23 +39,23 @@ let Registro = () => {
                 <h1>Registro</h1>
                 <form onSubmit={registro}>
                     <div>
-                        <input type="text" id="email" autocomplete="off" required ref={email}/>
-                        <label for="email">Email</label>
+                        <input type="text" id="email" autoComplete="off" required ref={email}/>
+                        <label htmlFor="email">Email</label>
                     </div>
                     <div>
-                        <input type="number" id="altura" autocomplete="off" required ref={altura}/>
-                        <label for="altura">Altura</label>
+                        <input type="number" id="altura" autoComplete="off" required ref={altura}/>
+                        <label htmlFor="altura">Altura</label>
                     </div>
                     <div>
-                        <input type="password" id="pass" autocomplete="off" required ref={contrasena}/>
-                        <label for="pass">Contraseña</label>
+                        <input type="password" id="pass" autoComplete="off" required ref={contrasena}/>
+                        <label htmlFor="pass">Contraseña</label>
                     </div>
                     <div>
-                        <input type="password" id="confirmar" autocomplete="off" required ref={verifContrasena}/>
-                        <label for="confirmar">Confirmar contraseña</label>
+                        <input type="password" id="confirmar" autoComplete="off" required ref={verifContrasena}/>
+                        <label htmlFor="confirmar">Confirmar contraseña</label>
                     </div>
                     <input type="submit" value="Registrarse" />
-                    <a href="login.html">Volver al login</a>
+                    {/* <Link to="/Login">Volver al login</Link> */}
                 </form>
             </div>
         </div>
