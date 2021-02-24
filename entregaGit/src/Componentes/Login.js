@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 
 let Login = () => { 
   const mail = useRef(null);
@@ -49,7 +50,7 @@ let Login = () => {
               
             </div>
             <input type="submit" value="Iniciar sesión"/>
-            {/* <Link to="/Registro">Registrarse</Link> */}
+            <Link to="/Registro">Registrarse</Link>
           </form>
       </div>
     </div>
