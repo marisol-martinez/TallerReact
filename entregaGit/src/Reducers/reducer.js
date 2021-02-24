@@ -5,6 +5,8 @@ let reducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOGUEAR":
       return { ...state, logged: true };
+    case "LISTADO_ENTRENAMIENTO":
+      return { ...state, listaDeEntrenamientos: action.payload };
     default:
       return state;
   }
