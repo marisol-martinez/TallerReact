@@ -1,42 +1,61 @@
+import { connect } from "react-redux";
 import { Pie } from '@reactchartjs/react-chart.js'
 
-const GraficaMinutosEntr= () => { 
-    /* var ctx = document.getElementById('graficaMin').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'bar',
+const GraficaMinutosEntr = (props) => {
 
-    // The data for our dataset
-    data: {
-        labels: ['Ejercicio1', 'Ejercicio2', 'Ejercicio3', 'Ejercicio4'],
-        datasets: [{
-            label: 'Índice de masa corporal',
-            backgroundColor: 'rgb(117, 65, 204)',
-            borderColor: 'rgb(72, 22, 156)',
-            data: [80, 43, 56, 21]
-        }]
-    },
-
-    // Configuration options go here
-    options: {
-        legend: {
-            display: false
-        },
-        tooltips: {
-            callbacks: {
-                label: function(tooltipItem) {
-                    return tooltipItem.yLabel;
+    let etiquetas = () => {
+        let nombreEntrenamientos = [];
+        for (let i = 0; i < props.tiposEntrenamientos.length; i++) {
+            for (let j = 0; j < props.listaDeEntrenamientos.length; j++) {
+                if (props.tiposEntrenamientos[i].id === props.listaDeEntrenamientos[j].trainning_type) {
+                    nombreEntrenamientos.push({"nombre": props.tiposEntrenamientos[i].name,
+                     "minutos": props.listaDeEntrenamientos[j].minutes});
                 }
             }
         }
+        console.log(nombreEntrenamientos);
+        return nombreEntrenamientos;
     }
-}); */
+    const data = {
+        labels: etiquetas(),
+
+        datasets: [
+            {
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 1,
+            },
+        ],
+    }
 
     return (
         <div id="graficaminEntrenamientos">
             <p>Minutos por entrenamiento</p>
+            <Pie data={data} />
         </div>
     );
 }
 
-export default GraficaMinutosEntr
+
+const mapStateToProps = (state) => ({
+    listaDeEntrenamientos: state.listaDeEntrenamientos,
+    tiposEntrenamientos: state.tiposEntrenamientos,
+});
+
+export default connect(mapStateToProps)(GraficaMinutosEntr)
