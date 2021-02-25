@@ -1,3 +1,5 @@
+import { Pie } from '@reactchartjs/react-chart.js'
+
 const GraficaMinutosEntr= () => { 
     /* var ctx = document.getElementById('graficaMin').getContext('2d');
 var chart = new Chart(ctx, {
@@ -33,7 +35,6 @@ var chart = new Chart(ctx, {
     return (
         <div id="graficaminEntrenamientos">
             <p>Minutos por entrenamiento</p>
-            <canvas id="graficaMin"></canvas>
         </div>
     );
 }

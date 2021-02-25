@@ -1,17 +1,27 @@
-//btn con signo de mas para agregar un entrenamiento
-const AgregarEntrenamiento = () => {  
+import {connect} from "react-redux";
+import { useRef} from "react";
+const AgregarEntrenamiento = (props) => {  
+    const minutos = useRef(null);
+    const pesoActual = useRef(null);
+    const tipoEntr = useRef(null);
     
-    //Save training
-    //https://trainning-rest-api.herokuapp.com/v1/trainings
+    
+    const agregar = (e) => {
+        e.preventDefault();
     var myHeaders = new Headers();
-    myHeaders.append("Authorization", "e0755d89bd8e0b787f7028c6e2ca1399");
+    let usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
+    myHeaders.append("Authorization", usuario.token);
+    console.log(Number(minutos.current.value));
+    console.log(Number(tipoEntr.current.value));
+    console.log(usuario.id);
+    console.log(Number(pesoActual.current.value));
 
-    var raw = {
-        "minutes": 15,
-        "trainning_type": 1,
+    var raw = JSON.stringify({
+        "minutes": Number(minutos.current.value),
+        "trainning_type": Number(tipoEntr.current.value),
         "user_id": 31,
-        "weight": 10
-    };
+        "weight": Number(pesoActual.current.value)
+    });
 
     var requestOptions = {
     method: 'POST',
@@ -21,43 +31,45 @@ const AgregarEntrenamiento = () => {
     };
 
     fetch("https://trainning-rest-api.herokuapp.com/v1/trainings", requestOptions)
-    .then(response => response.text())
+    .then(response => response.json())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
-    
-    const agregar = (e) => {
-
     };
 
     const cerrar = (e) => {
 
     };
-  
+  //
     return (
-      <div id="contenedorForm" class="bgBlanco">
+        <div id="formEntrenamiento" className="abrirForm">
+        <div id="contenedorForm" className="bgBlanco">
             <h1>Agregar entrenamiento</h1>
-            <form>
+            <form  onSubmit={agregar}>
                 <div>
-                    <input type="text" id="minutos" autoComplete="off" required/>
-                    <label class="txtNegro" htmlFor="minutos">Minutos</label>
+                    <input type="number" id="minutos" autoComplete="off" required ref={minutos}/>
+                    <label className="txtNegro" htmlFor="minutos">Minutos</label>
                 </div>
                 <div>
-                    <input type="text" id="txtPeso" autoComplete="off" required/>
-                    <label class="txtNegro" htmlFor="txtPeso">Peso actual</label>
+                    <input type="number" id="txtPeso" autoComplete="off" required ref={pesoActual}/>
+                    <label className="txtNegro" htmlFor="txtPeso">Peso actual</label>
                 </div>
                 <div>
-                    <select id="tipo">
-                        <option>Entrenamiento 1</option>
-                        <option>Entrenamiento 2</option>
+                    <select id="tipo"  ref={tipoEntr}>
+                        {props.tiposEntrenamientos.map(tipo => <option value={tipo.id} key={tipo.id}>{tipo.name}</option>)}
                     </select>
                 </div>
                 <div>
-                    <button id="cancelar" onClick={cerrar}>Cancelar</button>
-                    <input type="submit" value="Agregar" onClick={agregar}/>
+                    <button id="cancelar">Cancelar</button>
+                    <input type="submit" value="Agregar"/>
                 </div>
             </form>
         </div>
+    </div>
     );
   };
   
-  export default AgregarEntrenamiento;
+  const mapStateToProps = (state) => ({
+    tiposEntrenamientos: state.tiposEntrenamientos,
+});
+
+export default connect(mapStateToProps)(AgregarEntrenamiento)

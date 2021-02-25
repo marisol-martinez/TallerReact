@@ -2,9 +2,9 @@
 import ListaMinutosEntr from './ListaMinutosEntr';
 import GraficaMinutosEntr from './GraficaMinutosEntr';
 const MinutosdEntrenamientos = () => { 
+{/* <ListaMinutosEntr/> */}
     return (
         <div id="minEntrenamientos">
-        <ListaMinutosEntr/>
         <GraficaMinutosEntr/>
     </div>  
     );

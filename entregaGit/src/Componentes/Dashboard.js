@@ -1,13 +1,12 @@
 import {connect} from "react-redux";
 import {useEffect } from "react";
 import Menu from './Menu';
-import AgregarEntrenamiento from './AgregarEntrenamiento';
 import CantidadEntrenamientos from './CantidadEntrenamientos';
 // import ComparacionPeso from './ComparacionPeso';
 // import GraficaIMC from './GraficaIMC';
 import InformacionPersonal from './InformacionPersonal';
 import ListaEntrenamiento from './ListaEntrenamiento';
-// import MinutosEntrenamiento from './MinutosEntrenamientos';
+import MinutosEntrenamiento from './MinutosEntrenamientos';
 
 const Dashboard = (props) => { 
     useEffect(() => {
@@ -61,11 +60,15 @@ const obtenerTiposEntrenamientos = () =>{
   //if (!props.logged) return <Redirect to="/" />;
 
     return (
+      <>
+      <Menu/>
       <main>
           <InformacionPersonal/>
           <CantidadEntrenamientos/>
           <ListaEntrenamiento/>
+          <MinutosEntrenamiento/>
       </main>
+      </>
     );
 }
 

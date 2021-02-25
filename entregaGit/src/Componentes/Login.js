@@ -13,9 +13,6 @@ let Login = ({logged, dispatch}) => {
     
     let loguearse = (e) => {
     e.preventDefault();
-    console.log(mail.current.value);
-    console.log(contrasena.current.value);
-
     var myHeaders = new Headers();
 
     var raw = JSON.stringify({
