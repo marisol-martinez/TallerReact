@@ -7,22 +7,34 @@ const GraficaMinutosEntr = (props) => {
         let nombreEntrenamientos = [];
         for (let i = 0; i < props.tiposEntrenamientos.length; i++) {
             for (let j = 0; j < props.listaDeEntrenamientos.length; j++) {
+                //si el usuario hizo el tipo de entrenamiento entra al if
                 if (props.tiposEntrenamientos[i].id === props.listaDeEntrenamientos[j].trainning_type) {
-                    nombreEntrenamientos.push({"nombre": props.tiposEntrenamientos[i].name,
-                     "minutos": props.listaDeEntrenamientos[j].minutes});
+                    let tiposEntrenamiento = nombreEntrenamientos.filter(n => n.id == props.tiposEntrenamientos[i].id)[0];
+                    //si entra a este if es porque ya existe el tipo de entrenamiento en la lista de retorno
+                    if (tiposEntrenamiento) {
+                        tiposEntrenamiento.minutos += props.listaDeEntrenamientos[j].minutes;
+                    }
+                    //si entra al else no existe el tipo de entrenamiento en la lista
+                    else {
+                        nombreEntrenamientos.push({
+                            id: props.tiposEntrenamientos[i].id,
+                            nombre: props.tiposEntrenamientos[i].name,
+                            minutos: props.listaDeEntrenamientos[j].minutes
+                        });
+                    }
                 }
+
             }
         }
-        console.log(nombreEntrenamientos);
+
         return nombreEntrenamientos;
     }
+    console.log(etiquetas());
     const data = {
-        labels: etiquetas(),
-
+        labels: etiquetas().map(e => e.nombre),
         datasets: [
             {
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                data: etiquetas().map(e => e.minutos),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
