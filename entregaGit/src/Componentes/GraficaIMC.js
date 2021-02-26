@@ -1,42 +1,63 @@
-const GraficaIMC= () => { 
+import { connect } from "react-redux";
+import { Bar } from '@reactchartjs/react-chart.js'
 
-    /* var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
+const GraficaIMC = (props) => {
 
-    // The data for our dataset
-    data: {
-        labels: ['18/02', '26/02', '02/03', '10/03', '17/03', '15/02'],
-        datasets: [{
-            label: 'Índice de masa corporal',
-            backgroundColor: 'rgb(52, 158, 235)',
-            borderColor: 'rgb(5, 117, 197)',
-            data: [22, 18, 35, 21, 24, 50]
-        }]
-    },
-
-    // Configuration options go here
-    options: {
-        legend: {
-            display: false
-        },
-        tooltips: {
-            callbacks: {
-                label: function(tooltipItem) {
-                    return tooltipItem.yLabel;
-                }
-            }
-        }
+   const imc = (peso) =>{
+        let usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
+        let alturaMetrosAlCuadrado = (usuario.height / 10) * (usuario.height / 10)
+        return peso / alturaMetrosAlCuadrado;
     }
-}); */
+
+    const data = {
+        labels: props.listaDeEntrenamientos.map(e => `${e.weight}kg` ),
+        datasets: [
+            {
+                data: props.listaDeEntrenamientos.map(e => imc(e.weight)*100),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 1,
+            },
+        ],
+    }
+
+    const options = {
+        scales: {
+            yAxes: [
+                {
+                    ticks: {
+                        beginAtZero: true,
+                    },
+                },
+            ],
+        },
+    }
+
 
     return (
         <div id="imc">
             <p>Índice de masa corporal</p>
-            <canvas id="myChart"></canvas>
+            <Bar data={data} options={options} />
         </div>
     );
 }
 
-export default GraficaIMC
+const mapStateToProps = (state) => ({
+    listaDeEntrenamientos: state.listaDeEntrenamientos,
+});
+
+export default connect(mapStateToProps)(GraficaIMC)

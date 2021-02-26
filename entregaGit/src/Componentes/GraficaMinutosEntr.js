@@ -23,13 +23,13 @@ const GraficaMinutosEntr = (props) => {
                         });
                     }
                 }
-
+    
             }
         }
-
+    
         return nombreEntrenamientos;
     }
-    console.log(etiquetas());
+
     const data = {
         labels: etiquetas().map(e => e.nombre),
         datasets: [
@@ -67,7 +67,7 @@ const GraficaMinutosEntr = (props) => {
 
 const mapStateToProps = (state) => ({
     listaDeEntrenamientos: state.listaDeEntrenamientos,
-    tiposEntrenamientos: state.tiposEntrenamientos,
+    tiposEntrenamientos: state.tiposEntrenamientos
 });
 
 export default connect(mapStateToProps)(GraficaMinutosEntr)

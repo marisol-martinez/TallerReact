@@ -1,4 +1,4 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import Entrenamiento from "./Entrenamiento"
 
 
@@ -8,7 +8,7 @@ const ListaEntrenamiento = (props) => {
     return (
         <div id="listaEntrenamientos">
             <table>
-                <thead>
+                <tbody>
                     <tr>
                         <th>Id</th>
                         <th>Entrenamiento</th>
@@ -16,9 +16,7 @@ const ListaEntrenamiento = (props) => {
                         <th>Kcal quemadas</th>
                         <th></th>
                     </tr>
-                </thead>
-                <tbody>
-                {props.listaDeEntrenamientos.map(e => <Entrenamiento key={e.id} {...e}/>)}
+                    {props.listaDeEntrenamientos.map(e => <Entrenamiento key={e.id} {...e} />)}
                 </tbody>
             </table>
         </div>

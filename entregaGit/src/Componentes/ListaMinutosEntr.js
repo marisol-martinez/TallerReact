@@ -1,30 +1,53 @@
-const ListaMinutosEntr = () => { 
+import {connect} from "react-redux";
+import TipoEntrenamiento from './TipoEntrenamiento';
+
+const ListaMinutosEntr = (props) => { 
+
+    let etiquetas = () => {
+        let nombreEntrenamientos = [];
+        for (let i = 0; i < props.tiposEntrenamientos.length; i++) {
+            for (let j = 0; j < props.listaDeEntrenamientos.length; j++) {
+                //si el usuario hizo el tipo de entrenamiento entra al if
+                if (props.tiposEntrenamientos[i].id === props.listaDeEntrenamientos[j].trainning_type) {
+                    let tiposEntrenamiento = nombreEntrenamientos.filter(n => n.id == props.tiposEntrenamientos[i].id)[0];
+                    //si entra a este if es porque ya existe el tipo de entrenamiento en la lista de retorno
+                    if (tiposEntrenamiento) {
+                        tiposEntrenamiento.minutos += props.listaDeEntrenamientos[j].minutes;
+                    }
+                    //si entra al else no existe el tipo de entrenamiento en la lista
+                    else {
+                        nombreEntrenamientos.push({
+                            id: props.tiposEntrenamientos[i].id,
+                            nombre: props.tiposEntrenamientos[i].name,
+                            minutos: props.listaDeEntrenamientos[j].minutes
+                        });
+                    }
+                }
+    
+            }
+        }
+    
+        return nombreEntrenamientos;
+    }
+
     return (
         <div id="listaMinEntrenamientos">
-            <table style="width:100%">
-                <tr>
-                    <td>Ejercicio</td>
-                    <td>Minutos</td>
-                </tr>
-                <tr>
-                    <td>Correr</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <td>Pesas</td>
-                    <td>60</td>
-                </tr>
-                <tr>
-                    <td>Pesas</td>
-                    <td>60</td>
-                </tr>
-                <tr>
-                    <td>Pesas</td>
-                    <td>60</td>
-                </tr>
+             <table>
+                <tbody>
+                    <tr>
+                        <th>Ejercicio</th>
+                        <th>Minutos</th>
+                    </tr>
+                    {etiquetas().map(e => <TipoEntrenamiento key={e.id} {...e} />)}
+                </tbody>
             </table>
         </div>
     );
 }
 
-export default ListaMinutosEntr
+const mapStateToProps = (state) => ({
+    listaDeEntrenamientos: state.listaDeEntrenamientos,
+    tiposEntrenamientos: state.tiposEntrenamientos
+});
+
+export default connect(mapStateToProps)(ListaMinutosEntr);

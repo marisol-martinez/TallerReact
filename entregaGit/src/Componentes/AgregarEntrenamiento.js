@@ -1,5 +1,6 @@
 import {connect} from "react-redux";
 import { useRef} from "react";
+
 const AgregarEntrenamiento = (props) => {  
     const minutos = useRef(null);
     const pesoActual = useRef(null);
@@ -11,10 +12,6 @@ const AgregarEntrenamiento = (props) => {
     var myHeaders = new Headers();
     let usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
     myHeaders.append("Authorization", usuario.token);
-    console.log(Number(minutos.current.value));
-    console.log(Number(tipoEntr.current.value));
-    console.log(usuario.id);
-    console.log(Number(pesoActual.current.value));
 
     var raw = JSON.stringify({
         "minutes": Number(minutos.current.value),

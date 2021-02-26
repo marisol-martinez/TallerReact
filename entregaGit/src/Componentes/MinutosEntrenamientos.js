@@ -1,12 +1,12 @@
 //componente con minutos por entrenamientos
 import ListaMinutosEntr from './ListaMinutosEntr';
 import GraficaMinutosEntr from './GraficaMinutosEntr';
-const MinutosdEntrenamientos = () => { 
-{/* <ListaMinutosEntr/> */}
+const MinutosdEntrenamientos = () => {
     return (
         <div id="minEntrenamientos">
-        <GraficaMinutosEntr/>
-    </div>  
+            <ListaMinutosEntr />
+            <GraficaMinutosEntr />
+        </div>
     );
 }
 

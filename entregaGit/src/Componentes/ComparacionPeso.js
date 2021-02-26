@@ -1,27 +1,51 @@
-const ComparacionPeso= () => { 
-    var graficaPeso = document.getElementById('myChartPeso').getContext('2d');
-    /* var chart = new Chart(graficaPeso, {
-        type: 'bar',
-        // The data for our dataset
-        data: {
-            labels: ['Antes', 'Ahora'],
-            datasets: [{
-                label: 'Peso',
-                backgroundColor: ['rgb(150, 255, 0)', 'rgb(250,250,160)'],
-                borderColor: 'rgb(5, 117, 197)',
-                data: [22, 18]
-            }]
+import { Bar } from '@reactchartjs/react-chart.js'
+import { connect } from "react-redux";
+
+const ComparacionPeso = (props) => {
+
+    const data = {
+        labels: ["Comparación de peso"],
+        datasets: [
+            {
+                label: 'Peso anterior',
+                data: props.listaDeEntrenamientos.length > 1 ? [props.listaDeEntrenamientos[1].weight] : [],
+                backgroundColor: 'rgb(255, 99, 132)',
+            },
+            {
+                label: 'Peso actual',
+                data: props.listaDeEntrenamientos.length > 0 ? [props.listaDeEntrenamientos[0].weight] : [],
+                backgroundColor: 'rgb(54, 162, 235)',
+            },
+        ],
+    }
+    const options = {
+        scales: {
+            yAxes: [
+                {
+                    stacked: true,
+                    ticks: {
+                        beginAtZero: true,
+                    },
+                },
+            ],
+            xAxes: [
+                {
+                    stacked: true,
+                },
+            ],
         },
-        options: {}
-    }); */
+    }
 
     return (
         <div id="peso">
-            <p>85kg</p>
-            <p>87kg</p>
-            <canvas id="myChartPeso"></canvas>
+            <Bar data={data} options={options} />
         </div>
     );
 }
 
-export default ComparacionPeso
+
+const mapStateToProps = (state) => ({
+    listaDeEntrenamientos: state.listaDeEntrenamientos,
+});
+
+export default connect(mapStateToProps)(ComparacionPeso)
