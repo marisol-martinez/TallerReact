@@ -1,40 +1,44 @@
 import {connect} from "react-redux";
 import { useRef} from "react";
+import { useHistory } from "react-router-dom";
 
 const AgregarEntrenamiento = (props) => {  
     const minutos = useRef(null);
     const pesoActual = useRef(null);
     const tipoEntr = useRef(null);
+    let history = useHistory();
     
     
     const agregar = (e) => {
         e.preventDefault();
-    var myHeaders = new Headers();
-    let usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
-    myHeaders.append("Authorization", usuario.token);
+        var myHeaders = new Headers();
+        let usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
+        myHeaders.append("Authorization", usuario.token);
 
-    var raw = JSON.stringify({
-        "minutes": Number(minutos.current.value),
-        "trainning_type": Number(tipoEntr.current.value),
-        "user_id": 31,
-        "weight": Number(pesoActual.current.value)
-    });
+        var raw = JSON.stringify({
+            "minutes": Number(minutos.current.value),
+            "trainning_type": Number(tipoEntr.current.value),
+            "user_id": 31,
+            "weight": Number(pesoActual.current.value)
+        });
 
-    var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-    };
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
 
-    fetch("https://trainning-rest-api.herokuapp.com/v1/trainings", requestOptions)
-    .then(response => response.json())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
-    };
+        fetch("https://trainning-rest-api.herokuapp.com/v1/trainings", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            history.push("/dashboard");
+        })
+        .catch(error => console.log('error', error));
+        };
 
     const cerrar = (e) => {
-
+        history.push("/dashboard");
     };
   //
     return (
@@ -56,7 +60,7 @@ const AgregarEntrenamiento = (props) => {
                     </select>
                 </div>
                 <div>
-                    <button id="cancelar">Cancelar</button>
+                    <button id="cancelar" onClick={cerrar}>Cancelar</button>
                     <input type="submit" value="Agregar"/>
                 </div>
             </form>

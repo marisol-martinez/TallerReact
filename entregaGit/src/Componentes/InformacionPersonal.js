@@ -4,7 +4,7 @@ const InformacionPersonal = (props) => {
 
     let usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
     const imc = (peso) => {
-        let alturaMetrosAlCuadrado = (usuario.height / 10) * (usuario.height / 10)
+        let alturaMetrosAlCuadrado = (usuario.height / 100) * (usuario.height / 100)
         return peso / alturaMetrosAlCuadrado;
     }
 
@@ -30,8 +30,8 @@ const InformacionPersonal = (props) => {
             <p>Información personal</p>
             <p>Último peso ingresado: {peso}kg</p>
             <p>Altura: <span>{usuario.height}cm</span></p>
-            <p>Índice de masa corporal: <span>{imc(peso)}</span></p>
-            <p>Estado actual: <span id="mensaje">{mensaje(imc(800))}</span></p>
+            <p>Índice de masa corporal: <span>{imc(peso).toFixed(2)}</span></p>
+            <p>Estado actual: <span id="mensaje">{mensaje(imc(peso))}</span></p>
         </div>
     );
 }

@@ -10,7 +10,6 @@ const ListaEntrenamiento = (props) => {
             <table>
                 <tbody>
                     <tr>
-                        <th>Id</th>
                         <th>Entrenamiento</th>
                         <th>Min.</th>
                         <th>Kcal. quemadas</th>

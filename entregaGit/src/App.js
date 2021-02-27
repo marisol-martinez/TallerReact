@@ -23,6 +23,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/registro" component={Registro} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/dashboard/agregar" component={AgregarEntrenamiento} />
           <Route path="/agregar" component={AgregarEntrenamiento} />
         </Switch>
       </Router>

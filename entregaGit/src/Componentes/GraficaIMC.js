@@ -5,7 +5,7 @@ const GraficaIMC = (props) => {
 
     const imc = (peso) => {
         let usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
-        let alturaMetrosAlCuadrado = (usuario.height / 10) * (usuario.height / 10)
+        let alturaMetrosAlCuadrado = (usuario.height / 100) * (usuario.height / 100)
         return peso / alturaMetrosAlCuadrado;
     }
 
@@ -13,7 +13,7 @@ const GraficaIMC = (props) => {
         labels: props.listaDeEntrenamientos.map(e => `${e.weight}kg`),
         datasets: [
             {
-                data: props.listaDeEntrenamientos.map(e => imc(e.weight) * 100),
+                data: props.listaDeEntrenamientos.map(e => imc(e.weight).toFixed(2)),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

@@ -1,23 +1,25 @@
 import { connect } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 import Menu from './Menu';
 import CantidadEntrenamientos from './CantidadEntrenamientos';
 import ComparacionPeso from './ComparacionPeso';
 import GraficaIMC from './GraficaIMC';
 import InformacionPersonal from './InformacionPersonal';
 import ListaEntrenamiento from './ListaEntrenamiento';
-import MinutosEntrenamiento from './MinutosEntrenamientos';
 import GraficaMinutosEntr from "./GraficaMinutosEntr";
 import ListaMinutosEntr from "./ListaMinutosEntr";
 
 
 const Dashboard = (props) => {
-  useEffect(() => {
-    obtenerEntrenamientos();
-    obtenerTiposEntrenamientos();
-  }, []);
 
-  // "https://trainning-rest-api.herokuapp.com/v1/users/31/trainings", requestOptions)
+    useEffect(() => {
+      if(localStorage.getItem('usuarioLogueado') != null){
+        obtenerEntrenamientos();
+      obtenerTiposEntrenamientos();
+      }
+    }, []);
+
   const obtenerEntrenamientos = () => {
     var myHeaders = new Headers();
     let usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
@@ -31,10 +33,8 @@ const Dashboard = (props) => {
     // fetch(`https://trainning-rest-api.herokuapp.com/v1/users/${usuario.id}/trainings`, requestOptions)
     fetch(`https://trainning-rest-api.herokuapp.com/v1/users/31/trainings`, requestOptions)
       .then(response => response.json())
-      .then(listado => {
-        //hay que entender como es la carga de datos
-
-        props.dispatch({ type: "LISTADO_ENTRENAMIENTO", payload: listado });
+      .then(lista => {
+        props.dispatch({ type: "LISTADO_ENTRENAMIENTO", payload: lista });
       })
       .catch(error => console.log('error', error));
   }
@@ -58,30 +58,32 @@ const Dashboard = (props) => {
       })
       .catch(error => console.log('error', error));
   }
-  //if (!props.logged) return <Redirect to="/" />;
 
-
+  if (localStorage.getItem('usuarioLogueado') == null) {return <Redirect to="/" />};
+  if (localStorage.getItem('usuarioLogueado') != null) {
   return (
-    <>
-      <Menu />
-      <main>
-        <InformacionPersonal />
-        <div id="componenteChico">
-          <ComparacionPeso />
-          <CantidadEntrenamientos />
-        </div>
-        <GraficaIMC />
-        <ListaEntrenamiento />
-        <ListaMinutosEntr />
-        <GraficaMinutosEntr />
-        {/* <MinutosEntrenamiento /> */}
-      </main>
-    </>
-  );
+      <>
+        <Menu />
+        <main>
+          <InformacionPersonal />
+          <div id="componenteChico">
+            <ComparacionPeso />
+            <CantidadEntrenamientos />
+          </div>
+          <GraficaIMC />
+          <ListaEntrenamiento />
+          <ListaMinutosEntr />
+          <GraficaMinutosEntr />
+        </main>
+      </>
+     );
+    };
+    
 }
 
 const mapStateToProps = (state) => ({
   listaDeEntrenamientos: state.listaDeEntrenamientos,
+  logged: state.logged,
 });
 
 export default connect(mapStateToProps)(Dashboard)

@@ -3,8 +3,6 @@ import initialState from "../Store/initialState";
 let reducer = (state = initialState, action) => {
   console.log(state, action);
   switch (action.type) {
-    case "LOGUEAR":
-      return { ...state, logged: true };
     case "LISTADO_ENTRENAMIENTO":
       return { ...state, listaDeEntrenamientos: action.payload };
       case "LISTADO_TIPOS":

@@ -1,14 +1,11 @@
 import { useRef, useState, useEffect } from "react";
 import {Link,useHistory} from "react-router-dom";
+import { connect } from 'react-redux'
 
-let Login = ({logged, dispatch}) => { 
-  const mail = useRef(null);
-  const contrasena = useRef(null);
-  const [usuario, setUsuario] = useState([]);
-
-  // useEffect(() => {
-    // }, []);
-
+let Login = ({dispatch}) => { 
+    const mail = useRef(null);
+    const contrasena = useRef(null);
+    const [usuario, setUsuario] = useState([]);
     let history = useHistory();
     
     let loguearse = (e) => {
@@ -32,7 +29,7 @@ let Login = ({logged, dispatch}) => {
         .then((datos) => {
           setUsuario(datos);
           //no funciona dispatch
-          //dispatch({type:"LOGUEAR"});
+          dispatch({type:"LOGUEAR"});
           localStorage.setItem('usuarioLogueado', datos);
           history.push("/dashboard");
         })
@@ -56,11 +53,14 @@ let Login = ({logged, dispatch}) => {
             </div>
             <input type="submit" value="Iniciar sesión"/>
             <Link to="/Registro">Registrarse</Link>
-            <Link to="/Dashboard">Dashboard</Link>
           </form>
       </div>
     </div>
   );
 }
 
-export default Login
+const mapStateToProps = (state) => ({
+  
+})
+
+export default connect(mapStateToProps)(Login)

@@ -1,36 +1,43 @@
-import { useRef, useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import { useRef, useState } from "react";
+import {Link, useHistory} from "react-router-dom";
 
-let Registro = () => { 
+let Registro = ({dispatch}) => { 
     const email = useRef(null);
     const contrasena = useRef(null);
     const altura = useRef(null);
     const verifContrasena = useRef(null);
     const [usuarioRegistrado, setUsuarioRegistrado] = useState([]);
+    let history = useHistory();
+    let advertencia = "";
 
   let registro = (e) => {
     e.preventDefault();
-    console.log(email.current.value);
-    console.log(contrasena.current.value);
-    console.log(altura.current.value);
-
     var raw = JSON.stringify({
         "username": email.current.value, 
         "password": contrasena.current.value,
         "height": Number(altura.current.value)
       });
     
-      var requestOptions = {
-        method: 'POST',
-        body: raw,
-        redirect: 'follow'
-      };
+    var requestOptions = {
+    method: 'POST',
+    body: raw,
+    redirect: 'follow'
+    };
 
-      fetch("https://trainning-rest-api.herokuapp.com/v1/users/register", requestOptions)
-      .then(response => response.text())
-      .then(datos => setUsuarioRegistrado(datos.results))
-      .catch(error => console.log('error', error));
-      console.log(setUsuarioRegistrado);
+    if(contrasena.current.value != verifContrasena.current.value){
+        advertencia = "Las contraseñas deben coincidir"
+    }else{
+        advertencia = "";
+        fetch("https://trainning-rest-api.herokuapp.com/v1/users/register", requestOptions)
+        .then(response => response.text())
+        .then(datos => {
+            setUsuarioRegistrado(datos.results);
+            localStorage.setItem('usuarioLogueado', datos);
+            history.push("/dashboard");
+        })
+        .catch(error => console.log('error', error));
+    }
+    
       
   }
 
@@ -55,6 +62,7 @@ let Registro = () => {
                         <input type="password" id="confirmar" autoComplete="off" required ref={verifContrasena}/>
                         <label htmlFor="confirmar">Confirmar contraseña</label>
                     </div>
+                    <p>{advertencia}</p>
                     <input type="submit" value="Registrarse" />
                     <Link to="/login">Volver al login</Link>
                 </form>
