@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 const ComparacionPeso = (props) => {
 
     const data = {
-        labels: ["Comparación de peso"],
+        //labels: [],
         datasets: [
             {
                 label: 'Peso anterior',
-                data: props.listaDeEntrenamientos.length > 1 ? [props.listaDeEntrenamientos[1].weight] : [],
+                data: props.listaDeEntrenamientos.length > 0 ? [props.listaDeEntrenamientos[1].weight] : [],
                 backgroundColor: 'rgb(255, 99, 132)',
             },
             {
@@ -23,9 +23,10 @@ const ComparacionPeso = (props) => {
             yAxes: [
                 {
                     stacked: true,
-                    ticks: {
-                        beginAtZero: true,
+                    gridLines: {
+                        display: false,
                     },
+                    display: false
                 },
             ],
             xAxes: [
@@ -34,10 +35,12 @@ const ComparacionPeso = (props) => {
                 },
             ],
         },
+        scaleLineColor: 'transparent',
     }
 
     return (
         <div id="peso">
+            <p>Comparación de peso</p>
             <Bar data={data} options={options} />
         </div>
     );

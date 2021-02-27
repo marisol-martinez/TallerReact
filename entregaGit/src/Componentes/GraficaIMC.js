@@ -3,17 +3,17 @@ import { Bar } from '@reactchartjs/react-chart.js'
 
 const GraficaIMC = (props) => {
 
-   const imc = (peso) =>{
+    const imc = (peso) => {
         let usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
         let alturaMetrosAlCuadrado = (usuario.height / 10) * (usuario.height / 10)
         return peso / alturaMetrosAlCuadrado;
     }
 
     const data = {
-        labels: props.listaDeEntrenamientos.map(e => `${e.weight}kg` ),
+        labels: props.listaDeEntrenamientos.map(e => `${e.weight}kg`),
         datasets: [
             {
-                data: props.listaDeEntrenamientos.map(e => imc(e.weight)*100),
+                data: props.listaDeEntrenamientos.map(e => imc(e.weight) * 100),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -45,6 +45,16 @@ const GraficaIMC = (props) => {
                 },
             ],
         },
+        legend: {
+            display: false
+        },
+        tooltips: {
+            callbacks: {
+                label: function (tooltipItem) {
+                    return tooltipItem.yLabel;
+                }
+            }
+        }
     }
 
 

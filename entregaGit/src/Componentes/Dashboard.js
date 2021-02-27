@@ -7,6 +7,9 @@ import GraficaIMC from './GraficaIMC';
 import InformacionPersonal from './InformacionPersonal';
 import ListaEntrenamiento from './ListaEntrenamiento';
 import MinutosEntrenamiento from './MinutosEntrenamientos';
+import GraficaMinutosEntr from "./GraficaMinutosEntr";
+import ListaMinutosEntr from "./ListaMinutosEntr";
+
 
 const Dashboard = (props) => {
   useEffect(() => {
@@ -63,11 +66,15 @@ const Dashboard = (props) => {
       <Menu />
       <main>
         <InformacionPersonal />
-        <ComparacionPeso />
-        <CantidadEntrenamientos />
+        <div id="componenteChico">
+          <ComparacionPeso />
+          <CantidadEntrenamientos />
+        </div>
         <GraficaIMC />
         <ListaEntrenamiento />
-        <MinutosEntrenamiento />
+        <ListaMinutosEntr />
+        <GraficaMinutosEntr />
+        {/* <MinutosEntrenamiento /> */}
       </main>
     </>
   );

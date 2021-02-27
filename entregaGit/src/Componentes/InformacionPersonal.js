@@ -9,27 +9,29 @@ const InformacionPersonal = (props) => {
     }
 
     let mensaje = (imc) => {
-        switch (imc) {
-            case (imc < (18, 5)):
+        switch (true) {
+            case imc < 18.5:
                 return "Bajo peso";
-            case (imc >= (18, 5) && imc <= (24, 9)):
+            case imc >= 18.5 && imc <= 24.9:
                 return "Peso saludable";
-            case (imc >= 25 && imc <= (29, 9)):
+            case imc >= 25 && imc <= 29.9:
                 return "Sobrepeso";
-            case (imc >= 30):
+            case imc >= 30:
                 return "Obesidad";
+            default:
+                return "Peso no valido";
         }
     }
 
-    console.log(props.listaDeEntrenamientos[0].weight);
+    const peso = props.listaDeEntrenamientos.length > 0 ? [props.listaDeEntrenamientos[0].weight] : 0;
 
     return (
         <div id="bienvenida">
             <p>Información personal</p>
-            <p>Último peso ingresado: {props.listaDeEntrenamientos.length > 0 ? [props.listaDeEntrenamientos[0].weight] : ""}kg</p>
+            <p>Último peso ingresado: {peso}kg</p>
             <p>Altura: <span>{usuario.height}cm</span></p>
-            <p>Índice de masa corporal: <span>{imc(props.listaDeEntrenamientos[0].weight)}</span></p>
-            <p>Estado actual: <span id="mensaje">{mensaje(imc(props.listaDeEntrenamientos[0].weight))}</span></p>
+            <p>Índice de masa corporal: <span>{imc(peso)}</span></p>
+            <p>Estado actual: <span id="mensaje">{mensaje(imc(800))}</span></p>
         </div>
     );
 }

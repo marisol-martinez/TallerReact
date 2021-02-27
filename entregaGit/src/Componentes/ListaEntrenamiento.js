@@ -12,8 +12,8 @@ const ListaEntrenamiento = (props) => {
                     <tr>
                         <th>Id</th>
                         <th>Entrenamiento</th>
-                        <th>Minutos</th>
-                        <th>Kcal quemadas</th>
+                        <th>Min.</th>
+                        <th>Kcal. quemadas</th>
                         <th></th>
                     </tr>
                     {props.listaDeEntrenamientos.map(e => <Entrenamiento key={e.id} {...e} />)}
