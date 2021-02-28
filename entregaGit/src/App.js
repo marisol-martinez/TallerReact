@@ -7,25 +7,33 @@ import Registro from './Componentes/Registro';
 import Dashboard from './Componentes/Dashboard';
 import AgregarEntrenamiento from './Componentes/AgregarEntrenamiento';
 import Menu from './Componentes/Menu';
-import {Provider} from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch, useLocation } from "react-router-dom";
+
+function Links() {
+  let location = useLocation();
+  let background = location.state && location.state.background;
+
+  return (
+    <div>
+      <Switch location={background || location}>
+        <Route exact path="/" component={Login} />
+        <Route path="/login" component={Login} />
+        <Route path="/registro" component={Registro} />
+        <Route path="/dashboard" component={Dashboard} />
+        {/* <Route path="/dashboard/agregar" component={AgregarEntrenamiento} /> */}
+      </Switch>
+
+      {background && <Route path="/dashboard/agregar" children={<AgregarEntrenamiento />} />}
+    </div>
+  )
+}
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
-        {/* <Login/> */}
-        {/* <Registro/> */}
-        {/* <Menu/> */}
-        {/* <Dashboard/> */}
-        <Switch>
-          <Route exact path="/" component={Login} />
-          <Route path="/login" component={Login} />
-          <Route path="/registro" component={Registro} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/dashboard/agregar" component={AgregarEntrenamiento} />
-          <Route path="/agregar" component={AgregarEntrenamiento} />
-        </Switch>
+        <Links />
       </Router>
     </Provider>
   );
