@@ -1,12 +1,14 @@
-import { NavLink, Link, useHistory } from "react-router-dom";
+import { NavLink, Link, useHistory, useLocation } from "react-router-dom";
 import { connect } from 'react-redux'
 
-const Menu = ({dispatch}) => {
+const Menu = ({ dispatch }) => {
   let history = useHistory();
   const cerrarSesion = (e) => {
     localStorage.clear();
     history.push("/login");
   };
+
+  let location = useLocation();
 
   return (
     <nav>
@@ -16,7 +18,10 @@ const Menu = ({dispatch}) => {
             <img src="https://www.logaster.com.es/blog/wp-content/uploads/sites/4/2019/03/0031_p_hard-core-gym-logo_18.png" alt="" />
           </li>
           <li>
-            <NavLink id="agregar" to="/agregar" activeClassName="activa">Agregar entrenamiento</NavLink>
+            <NavLink id="agregar" to={{
+              pathname: `/dashboard/agregar`,
+              state: { background: location }
+            }} activeClassName="activa">Agregar entrenamiento</NavLink>
           </li>
         </ul>
       </div>
@@ -28,7 +33,7 @@ const Menu = ({dispatch}) => {
 };
 
 const mapStateToProps = (state) => ({
-  
+
 })
 
 export default connect(mapStateToProps)(Menu)
