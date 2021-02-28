@@ -33,6 +33,7 @@ const AgregarEntrenamiento = (props) => {
         .then(response => response.json())
         .then(result => {
             history.push("/dashboard");
+            window.location.reload(true);
         })
         .catch(error => console.log('error', error));
         };

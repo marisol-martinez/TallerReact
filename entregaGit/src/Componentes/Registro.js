@@ -8,7 +8,8 @@ let Registro = ({dispatch}) => {
     const verifContrasena = useRef(null);
     const [usuarioRegistrado, setUsuarioRegistrado] = useState([]);
     let history = useHistory();
-    let advertencia = "";
+
+    const[advertencia, setAdvertencia] = useState("");
 
   let registro = (e) => {
     e.preventDefault();
@@ -25,9 +26,9 @@ let Registro = ({dispatch}) => {
     };
 
     if(contrasena.current.value != verifContrasena.current.value){
-        advertencia = "Las contraseñas deben coincidir"
+        setAdvertencia("Las contraseñas deben coincidir");
     }else{
-        advertencia = "";
+        setAdvertencia("");
         fetch("https://trainning-rest-api.herokuapp.com/v1/users/register", requestOptions)
         .then(response => response.text())
         .then(datos => {
@@ -62,7 +63,7 @@ let Registro = ({dispatch}) => {
                         <input type="password" id="confirmar" autoComplete="off" required ref={verifContrasena}/>
                         <label htmlFor="confirmar">Confirmar contraseña</label>
                     </div>
-                    <p>{advertencia}</p>
+                    <p className="advertencia">{advertencia}</p><br/>
                     <input type="submit" value="Registrarse" />
                     <Link to="/login">Volver al login</Link>
                 </form>

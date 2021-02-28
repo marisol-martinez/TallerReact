@@ -154,6 +154,9 @@ label {
     color: black;
 }
 
+.advertencia {
+    color: red;
+}
 input[type="submit"],
 #formEntrenamiento form div:last-child button {
     background-color: var(--azul);

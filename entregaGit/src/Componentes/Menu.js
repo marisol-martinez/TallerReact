@@ -15,7 +15,7 @@ const Menu = ({ dispatch }) => {
       <div>
         <ul>
           <li>
-            <img src="https://www.logaster.com.es/blog/wp-content/uploads/sites/4/2019/03/0031_p_hard-core-gym-logo_18.png" alt="" />
+          <img src="../logo.png" alt="" />
           </li>
           <li>
             <NavLink id="agregar" to={{
@@ -26,7 +26,7 @@ const Menu = ({ dispatch }) => {
         </ul>
       </div>
       <div>
-        <button onClick={cerrarSesion}><i data-feather="log-out"></i>Cerrar sesión</button>
+        <input type="button" onClick={cerrarSesion} value="Cerrar sesión"/>
       </div>
     </nav>
   );

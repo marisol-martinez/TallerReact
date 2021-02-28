@@ -8,21 +8,23 @@ let Login = ({dispatch}) => {
     const [usuario, setUsuario] = useState([]);
     let history = useHistory();
     
-    let loguearse = (e) => {
-    e.preventDefault();
-    var myHeaders = new Headers();
+    const[incorrecto, setIncorrecto] = useState("");
 
-    var raw = JSON.stringify({
-      "username": mail.current.value, 
-      "password": contrasena.current.value
-    });
-  
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
-    };
+    let loguearse = (e) => {
+      e.preventDefault();
+      setIncorrecto("");
+      var myHeaders = new Headers();
+      var raw = JSON.stringify({
+        "username": mail.current.value, 
+        "password": contrasena.current.value
+      });
+    
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
     
       fetch("https://trainning-rest-api.herokuapp.com/v1/users/login", requestOptions)
         .then(response => response.text())
@@ -33,12 +35,16 @@ let Login = ({dispatch}) => {
           localStorage.setItem('usuarioLogueado', datos);
           history.push("/dashboard");
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+          setIncorrecto("Credenciales no válidas");
+          console.log('error', error);
+        });
   }
 
   return (
     <div id="registro">
       <div id="contenedorForm">
+        <img src="../logo.png" alt="" />
           <h1>Inicio de sesión</h1>
           <form onSubmit={loguearse}>
             <div>
@@ -51,6 +57,7 @@ let Login = ({dispatch}) => {
               <label htmlFor="pass">Contraseña</label>
               
             </div>
+            <p className="advertencia">{incorrecto}</p><br/>
             <input type="submit" value="Iniciar sesión"/>
             <Link to="/Registro">Registrarse</Link>
           </form>
