@@ -18,7 +18,7 @@ const AgregarEntrenamiento = (props) => {
         var raw = JSON.stringify({
             "minutes": Number(minutos.current.value),
             "trainning_type": Number(tipoEntr.current.value),
-            "user_id": 31,
+            "user_id": usuario.id,
             "weight": Number(pesoActual.current.value)
         });
 
@@ -32,8 +32,19 @@ const AgregarEntrenamiento = (props) => {
         fetch("https://trainning-rest-api.herokuapp.com/v1/trainings", requestOptions)
         .then(response => response.json())
         .then(result => {
-            history.push("/dashboard");
-            window.location.reload(true);
+            if(result.status == 200){
+                var nuevoEntrenamiento = {
+                    "id": result.data.trainingID,
+                    "minutes": Number(minutos.current.value),
+                    "trainning_type": Number(tipoEntr.current.value),
+                    "user_id": usuario.id,
+                    "weight": Number(pesoActual.current.value)
+                }
+                //agregar el store
+                props.dispatch({ type: "AGREGAR_ENTRENAMIENTO", payload: nuevoEntrenamiento });
+                history.push("/dashboard");
+            }
+            /*window.location.reload(true); */
         })
         .catch(error => console.log('error', error));
         };

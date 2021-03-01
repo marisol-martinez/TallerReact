@@ -23,6 +23,7 @@ const Dashboard = (props) => {
   const obtenerEntrenamientos = () => {
     var myHeaders = new Headers();
     let usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
+    console.log(usuario);
     myHeaders.append("Authorization", usuario.token);
 
     var requestOptions = {
@@ -30,8 +31,8 @@ const Dashboard = (props) => {
       headers: myHeaders,
       redirect: 'follow'
     };
-    // fetch(`https://trainning-rest-api.herokuapp.com/v1/users/${usuario.id}/trainings`, requestOptions)
-    fetch(`https://trainning-rest-api.herokuapp.com/v1/users/31/trainings`, requestOptions)
+    
+    fetch(`https://trainning-rest-api.herokuapp.com/v1/users/${usuario.id}/trainings`, requestOptions)
       .then(response => response.json())
       .then(lista => {
         props.dispatch({ type: "LISTADO_ENTRENAMIENTO", payload: lista });

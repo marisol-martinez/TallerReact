@@ -1,10 +1,13 @@
-import { NavLink, Link, useHistory, useLocation } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { connect } from 'react-redux'
+import logo from './../logo.png';
 
-const Menu = ({ dispatch }) => {
+const Menu = (props) => {
   let history = useHistory();
   const cerrarSesion = (e) => {
     localStorage.clear();
+    props.dispatch({ type: "LISTADO_TIPOS", payload: [] });
+    props.dispatch({ type: "LISTADO_ENTRENAMIENTO", payload: [] });
     history.push("/login");
   };
 
@@ -15,7 +18,7 @@ const Menu = ({ dispatch }) => {
       <div>
         <ul>
           <li>
-          <img src="../logo.png" alt="" />
+          <img src={logo} alt=""/>
           </li>
           <li>
             <NavLink id="agregar" to={{
@@ -26,7 +29,7 @@ const Menu = ({ dispatch }) => {
         </ul>
       </div>
       <div>
-        <input type="button" onClick={cerrarSesion} value="Cerrar sesión"/>
+        <p id="cerrar" onClick={cerrarSesion}>Cerrar sesión</p>
       </div>
     </nav>
   );

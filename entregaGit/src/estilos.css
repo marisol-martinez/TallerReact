@@ -157,6 +157,7 @@ label {
 .advertencia {
     color: red;
 }
+
 input[type="submit"],
 #formEntrenamiento form div:last-child button {
     background-color: var(--azul);
@@ -274,6 +275,15 @@ nav img {
     background-color: var(--verde-oscuro);
 }
 
+#cerrar{
+    color: white;
+    text-align:  center;
+}
+
+#cerrar:hover{
+    cursor: pointer;
+    color: var(--violeta-oscuro);
+}
 
 /* - Main - */
 

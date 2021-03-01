@@ -30,6 +30,21 @@ const ListaMinutosEntr = (props) => {
         return nombreEntrenamientos;
     }
 
+    if(etiquetas().length > 0){
+        return (
+            <div id="listaMinEntrenamientos">
+                 <table>
+                    <tbody>
+                        <tr>
+                            <th>Ejercicio</th>
+                            <th>Minutos</th>
+                        </tr>
+                        {etiquetas().map(e => <TipoEntrenamiento key={e.id} {...e} />)}
+                    </tbody>
+                </table>
+            </div>
+        );
+    }else if(etiquetas().length < 1){
     return (
         <div id="listaMinEntrenamientos">
              <table>
@@ -38,11 +53,14 @@ const ListaMinutosEntr = (props) => {
                         <th>Ejercicio</th>
                         <th>Minutos</th>
                     </tr>
-                    {etiquetas().map(e => <TipoEntrenamiento key={e.id} {...e} />)}
+                    <tr>
+                        <td>No hay entrenamientos ingresados</td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
-    );
+    );}
 }
 
 const mapStateToProps = (state) => ({

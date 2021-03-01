@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import {Link, useHistory} from "react-router-dom";
+import logo from './../logo.png';
 
 let Registro = ({dispatch}) => { 
     const email = useRef(null);
@@ -32,9 +33,15 @@ let Registro = ({dispatch}) => {
         fetch("https://trainning-rest-api.herokuapp.com/v1/users/register", requestOptions)
         .then(response => response.text())
         .then(datos => {
-            setUsuarioRegistrado(datos.results);
-            localStorage.setItem('usuarioLogueado', datos);
-            history.push("/dashboard");
+            let datoJson = JSON.parse(datos);
+            setAdvertencia(datoJson.message);
+            /* if(datoJson.status != null && datoJson.status == 400){
+                setAdvertencia(datoJson.message);
+            } else if(datoJson.status != null && datoJson.status == 200){
+                setUsuarioRegistrado(datos.results);
+                localStorage.setItem('usuarioLogueado', datos.user);
+                history.push("/dashboard");
+            } */
         })
         .catch(error => console.log('error', error));
     }
@@ -45,6 +52,7 @@ let Registro = ({dispatch}) => {
     return (
         <div id="registro">
             <div id="contenedorForm">
+            <img src={logo} alt="" />
                 <h1>Registro</h1>
                 <form onSubmit={registro}>
                     <div>

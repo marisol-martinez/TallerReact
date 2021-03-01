@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import {Link,useHistory} from "react-router-dom";
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import logo from './../logo.png';
 
 let Login = ({dispatch}) => { 
     const mail = useRef(null);
@@ -29,14 +30,17 @@ let Login = ({dispatch}) => {
       fetch("https://trainning-rest-api.herokuapp.com/v1/users/login", requestOptions)
         .then(response => response.text())
         .then((datos) => {
-          setUsuario(datos);
-          //no funciona dispatch
-          dispatch({type:"LOGUEAR"});
-          localStorage.setItem('usuarioLogueado', datos);
-          history.push("/dashboard");
+          let datoJson = JSON.parse(datos);
+          if(datoJson.status != null && datoJson.status == 404){
+            setIncorrecto(datoJson.message);
+          }else{
+            setUsuario(datos);
+            dispatch({type:"LOGUEAR"});
+            localStorage.setItem('usuarioLogueado', datos);
+            history.push("/dashboard");
+          }
         })
         .catch(error => {
-          setIncorrecto("Credenciales no válidas");
           console.log('error', error);
         });
   }
@@ -44,7 +48,7 @@ let Login = ({dispatch}) => {
   return (
     <div id="registro">
       <div id="contenedorForm">
-        <img src="../logo.png" alt="" />
+        <img src={logo} alt="" />
           <h1>Inicio de sesión</h1>
           <form onSubmit={loguearse}>
             <div>
