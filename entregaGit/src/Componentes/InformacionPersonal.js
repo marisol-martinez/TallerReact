@@ -28,7 +28,7 @@ const InformacionPersonal = (props) => {
     return (
         <div id="bienvenida">
             <p>Información personal</p>
-            <p>Último peso ingresado: {peso}kg</p>
+            <p>Último peso ingresado: <span>{peso}kg</span></p>
             <p>Altura: <span>{usuario.height}cm</span></p>
             <p>Índice de masa corporal: <span>{imc(peso).toFixed(2)}</span></p>
             <p>Estado actual: <span id="mensaje">{mensaje(imc(peso))}</span></p>

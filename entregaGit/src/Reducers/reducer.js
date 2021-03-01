@@ -5,7 +5,7 @@ let reducer = (state = initialState, action) => {
     case "LISTADO_ENTRENAMIENTO":
       return { ...state, listaDeEntrenamientos: action.payload };
     case "AGREGAR_ENTRENAMIENTO":
-      return { ...state, listaDeEntrenamientos: [...state.listaDeEntrenamientos, action.payload] };
+      return { ...state, listaDeEntrenamientos: [action.payload, ...state.listaDeEntrenamientos] };
     case "ELIMINAR_ENTRENAMIENTO":
       let nuevaLista = state.listaDeEntrenamientos.filter(e => e.id != action.payload );
       return { ...state, listaDeEntrenamientos: nuevaLista};

@@ -5,27 +5,27 @@ const GraficaMinutosEntr = (props) => {
 
     let etiquetas = () => {
         let nombreEntrenamientos = [];
-        for (let i = 0; i < props.tiposEntrenamientos.length; i++) {
-            for (let j = 0; j < props.listaDeEntrenamientos.length; j++) {
+
+        {props.tiposEntrenamientos.map(e => {
+            {props.listaDeEntrenamientos.map(l => {
                 //si el usuario hizo el tipo de entrenamiento entra al if
-                if (props.tiposEntrenamientos[i].id === props.listaDeEntrenamientos[j].trainning_type) {
-                    let tiposEntrenamiento = nombreEntrenamientos.filter(n => n.id == props.tiposEntrenamientos[i].id)[0];
+                if (e.id === l.trainning_type) {
+                    let tiposEntrenamiento = nombreEntrenamientos.filter(n => n.id == e.id)[0];
                     //si entra a este if es porque ya existe el tipo de entrenamiento en la lista de retorno
                     if (tiposEntrenamiento) {
-                        tiposEntrenamiento.minutos += props.listaDeEntrenamientos[j].minutes;
+                        tiposEntrenamiento.minutos += l.minutes;
                     }
                     //si entra al else no existe el tipo de entrenamiento en la lista
                     else {
                         nombreEntrenamientos.push({
-                            id: props.tiposEntrenamientos[i].id,
-                            nombre: props.tiposEntrenamientos[i].name,
-                            minutos: props.listaDeEntrenamientos[j].minutes
+                            id: e.id,
+                            nombre: e.name,
+                            minutos: l.minutes
                         });
                     }
                 }
-    
-            }
-        }
+            })}
+        })}
     
         return nombreEntrenamientos;
     }
