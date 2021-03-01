@@ -8,13 +8,15 @@ const ComparacionPeso = (props) => {
         datasets: [
             {
                 label: 'Peso anterior',
-                data: props.listaDeEntrenamientos.length > 1 ? [props.listaDeEntrenamientos[1].weight] :  [],
-                backgroundColor: 'rgb(255, 99, 132)',
+                labelBackgroundColor: '#7541cc',
+                data: props.listaDeEntrenamientos.length > 1 ? [props.listaDeEntrenamientos[1].weight] : [],
+                backgroundColor: '#7541cc',
             },
             {
                 label: 'Peso actual',
+                labelBackgroundColor: '#349eeb',
                 data: props.listaDeEntrenamientos.length > 0 ? [props.listaDeEntrenamientos[0].weight] : [],
-                backgroundColor: 'rgb(54, 162, 235)',
+                backgroundColor: '#349eeb',
             },
         ],
     }

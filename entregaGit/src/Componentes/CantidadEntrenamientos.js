@@ -1,12 +1,11 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
-//componente con cantidad de entrenamientos, componente chico
-const CantidadEntrenamientos = (props) => { 
+const CantidadEntrenamientos = (props) => {
     return (
-      <div id="cantEntrenamientos">
+        <div id="cantEntrenamientos">
             <p>Cantidad de entrenamientos</p>
             <p>{props.listaDeEntrenamientos.length}</p>
-        </div>  
+        </div>
     );
 }
 

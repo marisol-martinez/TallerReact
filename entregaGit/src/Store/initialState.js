@@ -3,8 +3,6 @@ let initialState = {
     listaDeEntrenamientos: [],
     tiposEntrenamientos: [],
     minutosPorEntrenamientos: [],
-    logged:false
-  };
-  
-  export default initialState;
-  
+};
+
+export default initialState;

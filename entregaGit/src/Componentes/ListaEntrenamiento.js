@@ -1,10 +1,8 @@
 import { connect } from "react-redux";
 import Entrenamiento from "./Entrenamiento"
 
-
-//contenedor de lista de entrenamientos
 const ListaEntrenamiento = (props) => {
-    if(props.listaDeEntrenamientos.length > 0){
+    if (props.listaDeEntrenamientos.length > 0) {
         return (
             <div id="listaEntrenamientos">
                 <table>
@@ -20,7 +18,7 @@ const ListaEntrenamiento = (props) => {
                 </table>
             </div>
         )
-    }else if(props.listaDeEntrenamientos.length < 1){
+    } else if (props.listaDeEntrenamientos.length < 1) {
         return (
             <div id="listaEntrenamientos">
                 <table>
@@ -39,7 +37,7 @@ const ListaEntrenamiento = (props) => {
             </div>
         )
     }
-    
+
 }
 
 const mapStateToProps = (state) => ({

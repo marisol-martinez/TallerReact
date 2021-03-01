@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import Menu from './Menu';
 import CantidadEntrenamientos from './CantidadEntrenamientos';
@@ -13,17 +13,16 @@ import ListaMinutosEntr from "./ListaMinutosEntr";
 
 const Dashboard = (props) => {
 
-    useEffect(() => {
-      if(localStorage.getItem('usuarioLogueado') != null){
-        obtenerEntrenamientos();
+  useEffect(() => {
+    if (localStorage.getItem('usuarioLogueado') != null) {
+      obtenerEntrenamientos();
       obtenerTiposEntrenamientos();
-      }
-    }, []);
+    }
+  }, []);
 
   const obtenerEntrenamientos = () => {
     var myHeaders = new Headers();
     let usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
-    console.log(usuario);
     myHeaders.append("Authorization", usuario.token);
 
     var requestOptions = {
@@ -31,7 +30,7 @@ const Dashboard = (props) => {
       headers: myHeaders,
       redirect: 'follow'
     };
-    
+
     fetch(`https://trainning-rest-api.herokuapp.com/v1/users/${usuario.id}/trainings`, requestOptions)
       .then(response => response.json())
       .then(lista => {
@@ -54,15 +53,14 @@ const Dashboard = (props) => {
     fetch("https://trainning-rest-api.herokuapp.com/v1/training-types", requestOptions)
       .then(response => response.json())
       .then(tipos => {
-        //hay que entender como es la carga de datos
         props.dispatch({ type: "LISTADO_TIPOS", payload: tipos });
       })
       .catch(error => console.log('error', error));
   }
 
-  if (localStorage.getItem('usuarioLogueado') == null) {return <Redirect to="/" />};
+  if (localStorage.getItem('usuarioLogueado') == null) { return <Redirect to="/" /> };
   if (localStorage.getItem('usuarioLogueado') != null) {
-  return (
+    return (
       <>
         <Menu />
         <main>
@@ -77,14 +75,13 @@ const Dashboard = (props) => {
           <GraficaMinutosEntr />
         </main>
       </>
-     );
-    };
-    
+    );
+  };
+
 }
 
 const mapStateToProps = (state) => ({
   listaDeEntrenamientos: state.listaDeEntrenamientos,
-  logged: state.logged,
 });
 
 export default connect(mapStateToProps)(Dashboard)

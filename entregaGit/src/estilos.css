@@ -78,6 +78,13 @@ svg {
     place-items: center;
 }
 
+#registro img {
+    display: block;
+    margin: 0 auto;
+    filter: brightness(0) invert(1);
+    margin-bottom: 25px;
+}
+
 #contenedorForm {
     background-color: rgba(0, 0, 0, .7);
     width: 50%;
@@ -256,34 +263,38 @@ nav ul li a:hover {
 }
 
 nav img {
-    height: 10vh;
+    height: 8vh;
 }
 
 #agregar {
-    background-color: var(--verde);
+    background-color: var(--violeta);
     outline: 0;
     border: none;
     color: white;
     cursor: pointer;
-    padding: 12px 0;
+    padding: 12px;
     width: 80%;
     border-radius: 5px;
     transition: .3s all;
+    margin: 0 auto;
 }
 
 #agregar:hover {
-    background-color: var(--verde-oscuro);
+    background-color: var(--violeta-oscuro);
 }
 
-#cerrar{
+#cerrar {
     color: white;
-    text-align:  center;
+    text-align: center;
+    margin-bottom: 40px;
+    transition: .3s all;
 }
 
-#cerrar:hover{
+#cerrar:hover {
     cursor: pointer;
     color: var(--violeta-oscuro);
 }
+
 
 /* - Main - */
 
