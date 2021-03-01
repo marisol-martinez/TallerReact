@@ -40,11 +40,9 @@ const AgregarEntrenamiento = (props) => {
                     "user_id": usuario.id,
                     "weight": Number(pesoActual.current.value)
                 }
-                //agregar el store
                 props.dispatch({ type: "AGREGAR_ENTRENAMIENTO", payload: nuevoEntrenamiento });
                 history.push("/dashboard");
             }
-            /*window.location.reload(true); */
         })
         .catch(error => console.log('error', error));
         };
@@ -52,7 +50,7 @@ const AgregarEntrenamiento = (props) => {
     const cerrar = (e) => {
         history.push("/dashboard");
     };
-  //
+    
     return (
         <div id="formEntrenamiento" className="abrirForm">
         <div id="contenedorForm" className="bgBlanco">

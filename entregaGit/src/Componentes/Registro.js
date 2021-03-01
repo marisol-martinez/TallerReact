@@ -7,7 +7,6 @@ let Registro = ({dispatch}) => {
     const contrasena = useRef(null);
     const altura = useRef(null);
     const verifContrasena = useRef(null);
-    const [usuarioRegistrado, setUsuarioRegistrado] = useState([]);
     let history = useHistory();
 
     const[advertencia, setAdvertencia] = useState("");
@@ -34,14 +33,14 @@ let Registro = ({dispatch}) => {
         .then(response => response.text())
         .then(datos => {
             let datoJson = JSON.parse(datos);
-            setAdvertencia(datoJson.message);
-            /* if(datoJson.status != null && datoJson.status == 400){
+            if(datoJson.status == 400){
                 setAdvertencia(datoJson.message);
-            } else if(datoJson.status != null && datoJson.status == 200){
-                setUsuarioRegistrado(datos.results);
-                localStorage.setItem('usuarioLogueado', datos.user);
+            } else if(datoJson.status == 200){
+                console.log(datoJson.user);
+                console.log(JSON.stringify(datoJson.user));
+                localStorage.setItem('usuarioLogueado', JSON.stringify(datoJson.user));
                 history.push("/dashboard");
-            } */
+            }
         })
         .catch(error => console.log('error', error));
     }

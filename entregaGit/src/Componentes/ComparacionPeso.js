@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 const ComparacionPeso = (props) => {
 
     const data = {
-        //labels: [],
+        labels: ["comparación"],
         datasets: [
             {
                 label: 'Peso anterior',
@@ -13,7 +13,7 @@ const ComparacionPeso = (props) => {
             },
             {
                 label: 'Peso actual',
-                data: props.listaDeEntrenamientos.length > 1 ? [props.listaDeEntrenamientos[0].weight] : [],
+                data: props.listaDeEntrenamientos.length > 0 ? [props.listaDeEntrenamientos[0].weight] : [],
                 backgroundColor: 'rgb(54, 162, 235)',
             },
         ],

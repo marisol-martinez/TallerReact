@@ -1,7 +1,8 @@
 import { useHistory } from "react-router-dom";
 import { Redirect } from "react-router-dom";
+import {connect} from "react-redux";
 
-const EliminarEntrenamiento = ({id}) => {
+const EliminarEntrenamiento = ({id, dispatch}) => {
     
     let history = useHistory();
 
@@ -14,7 +15,6 @@ const EliminarEntrenamiento = ({id}) => {
         //e.preventDefault();
         var myHeaders = new Headers();
         let usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
-        let idEliminar = id;
         myHeaders.append("Authorization", usuario.token);
 
         var requestOptions = {
@@ -26,7 +26,7 @@ const EliminarEntrenamiento = ({id}) => {
         fetch(`https://trainning-rest-api.herokuapp.com/v1/users/${usuario.id}/trainings/${id}`, requestOptions)
         .then(response => response.text())
         .then(result => {
-            window.location.reload(true);
+            dispatch({ type: "ELIMINAR_ENTRENAMIENTO", payload: id });
         })
         .catch(error => console.log('error', error));
       }
@@ -40,4 +40,8 @@ const EliminarEntrenamiento = ({id}) => {
 )
 }
 
-export default EliminarEntrenamiento
+const mapStateToProps = (state) => ({
+
+});
+
+export default connect(mapStateToProps)(EliminarEntrenamiento)
